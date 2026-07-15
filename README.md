@@ -1,58 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Admin Template
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Install steps
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone this repository
+git clone https://github.com/ngoijr/laravel-admin-starter
+cd laravel-admin-starter
 
-php artisan boost:install
+# 2. cp .env.example .env
+
+# 3. Set up your database in .env, then run migrations
+#    (the default users/password_reset_tokens/sessions tables are all you need)
+php artisan migrate
+
+# 4. Serve it
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Visit `/register` to create the first account, or `/login` if you already
+have a user in the database.
 
-## Contributing
+## What's included
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+app/Http/Controllers/DashboardController.php          Dashboard, Tables, Components
+app/Http/Controllers/Auth/AuthenticatedSessionController.php   Login / logout
+app/Http/Controllers/Auth/RegisteredUserController.php         Registration
+app/Http/Controllers/Auth/PasswordResetLinkController.php      Forgot password
+app/Models/User.php                                    Standard Laravel user model
 
-## Code of Conduct
+resources/views/layouts/app.blade.php     Master layout (sidebar + topnav + content)
+resources/views/layouts/auth.blade.php    Auth layout (split-screen brand panel)
+resources/views/partials/sidebar.blade.php
+resources/views/partials/topnav.blade.php
+resources/views/dashboard.blade.php       Stat cards, charts, orders table, activity feed
+resources/views/tables.blade.php          Data tables page
+resources/views/components.blade.php      UI component kit
+resources/views/auth/login.blade.php
+resources/views/auth/register.blade.php
+resources/views/auth/forgot-password.blade.php
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+public/css/app.css     Shared design system (dashboard/tables/components pages)
+public/js/app.js       Shared shell JS (theme engine, sidebar, fullscreen, submenus)
+public/css/auth.css    Auth page styles
+routes/web.php          All named routes
+```
 
-## Security Vulnerabilities
+## Notes
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Theme, sidebar, and fullscreen controls** live in `public/js/app.js` and are
+  shared across every page via the master layout — edit once, applies everywhere.
+- **Charts** (`Chart.js`) are only loaded on the dashboard page via `@push('vendor-scripts')`,
+  so other pages don't pay for a script they don't use.
+- **Auth is wired to real Laravel**, not just demo JS: login uses `Auth::attempt()`,
+  registration hashes passwords with `Hash::make()`, and "forgot password" uses
+  Laravel's built-in `Password::sendResetLink()` broker. You'll need mail configured
+  in `.env` for reset emails to actually send.
+- The sidebar's "Data Views" submenu auto-expands when you're on `/tables`, driven
+  server-side via `request()->routeIs()` in the Blade partial — no JS needed for that.
+- All CDN links (Bootstrap, Bootstrap Icons, Chart.js, Google Fonts) point at
+  `cdnjs.cloudflare.com`, which is reliable and fast; swap for local `npm`/Vite
+  assets later if you want an offline build.
