@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
-| Nimbus Admin — Web Routes
+| CreativePro Admin — Web Routes
 |--------------------------------------------------------------------------
 | Guest (auth) routes are only reachable when logged out; the dashboard
 | and UI-kit pages require an authenticated session.

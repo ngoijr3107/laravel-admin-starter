@@ -5,7 +5,7 @@
 @section('form')
 <div class="form-card fade-up">
   <h1 class="h4 mb-1">Welcome back</h1>
-  <p class="text-secondary-c mb-4" style="font-size:.88rem;">Sign in to your Nimbus workspace to continue.</p>
+  <p class="text-secondary-c mb-4" style="font-size:.88rem;">Sign in to your CreativePro workspace to continue.</p>
 
   @if (session('status'))
     <div class="alert alert-success py-2" style="font-size:.83rem; border-radius:10px;">{{ session('status') }}</div>

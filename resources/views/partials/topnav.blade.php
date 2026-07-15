@@ -1,9 +1,9 @@
 <header class="topnav">
   <button class="icon-btn" id="sidebarToggle" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
 
-  <div class="search-pill">
+  <div class="search-pill" id="topbarSearchTrigger" role="button" aria-label="Open command palette">
     <i class="bi bi-search"></i>
-    <input type="text" placeholder="Search anything...">
+    <input type="text" placeholder="Search anything..." readonly style="cursor:pointer;">
     <kbd>⌘K</kbd>
   </div>
 

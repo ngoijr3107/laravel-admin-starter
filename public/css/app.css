@@ -1,11 +1,11 @@
 /* ============================================
-   NIMBUS DESIGN SYSTEM — CSS VARIABLES
+   CREATIVEPRO DESIGN SYSTEM — CSS VARIABLES
    ============================================ */
 :root{
   /* Brand */
-  --primary:#2563EB;
-  --primary-rgb:37,99,235;
-  --secondary:#4F46E5;
+  --primary:#0D9488;
+  --primary-rgb:13,148,136;
+  --secondary:#0891B2;
   --success:#16A34A;
   --warning:#F59E0B;
   --danger:#DC2626;
@@ -20,7 +20,7 @@
 
   /* Surfaces (light) */
   --bg-canvas: #EEF2FB;
-  --bg-mesh-a: rgba(37,99,235,.10);
+  --bg-mesh-a: rgba(13,148,136,.10);
   --bg-mesh-b: rgba(79,70,229,.08);
   --surface: rgba(255,255,255,.72);
   --surface-solid: #FFFFFF;
@@ -30,7 +30,7 @@
   --sidebar-bg: rgba(255,255,255,.55);
   --navbar-bg: rgba(255,255,255,.65);
   --shadow-soft: 0 1px 2px rgba(15,23,42,.04), 0 12px 32px -12px rgba(15,23,42,.10);
-  --shadow-lift: 0 20px 40px -16px rgba(37,99,235,.25);
+  --shadow-lift: 0 20px 40px -16px rgba(13,148,136,.25);
   --scrollbar-thumb: var(--gray-300);
 
   /* Radii */
@@ -40,11 +40,23 @@
   --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body:'Inter', system-ui, sans-serif;
   --font-mono:'JetBrains Mono', monospace;
+  --input-bg: var(--gray-50);
+  --skeleton-bg: var(--gray-200);
+
+  /* Remap Bootstrap's own variables so native components
+     (form-control, table, dropdown-menu, etc.) follow our theme too */
+  --bs-body-color: var(--text-primary);
+  --bs-body-bg: var(--bg-canvas);
+  --bs-border-color: var(--surface-border);
+  --bs-border-color-translucent: var(--surface-border);
+  --bs-emphasis-color: var(--text-primary);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-tertiary-bg: var(--surface);
 }
 
 [data-theme="dark"]{
   --bg-canvas: #0B0F1A;
-  --bg-mesh-a: rgba(37,99,235,.16);
+  --bg-mesh-a: rgba(13,148,136,.16);
   --bg-mesh-b: rgba(79,70,229,.14);
   --surface: rgba(23,29,46,.65);
   --surface-solid: #141A2A;
@@ -54,8 +66,10 @@
   --sidebar-bg: rgba(15,20,33,.60);
   --navbar-bg: rgba(15,20,33,.55);
   --shadow-soft: 0 1px 2px rgba(0,0,0,.2), 0 12px 32px -12px rgba(0,0,0,.5);
-  --shadow-lift: 0 20px 40px -16px rgba(37,99,235,.45);
+  --shadow-lift: 0 20px 40px -16px rgba(13,148,136,.45);
   --scrollbar-thumb: #2A3346;
+  --input-bg: rgba(255,255,255,.03);
+  --skeleton-bg: rgba(255,255,255,.08);
 }
 
 *{box-sizing:border-box;}
@@ -109,8 +123,15 @@ h1,h2,h3,h4,h5,h6,.font-display{font-family:var(--font-display); letter-spacing:
 .sidebar.collapsed .nav-label,
 .sidebar.collapsed .nav-badge,
 .sidebar.collapsed .nav-caret,
+.sidebar.collapsed .nav-section-label,
 .sidebar.collapsed .sidebar-footer-text{display:none !important;}
 .sidebar.collapsed .nav-link{justify-content:center;}
+.sidebar.collapsed .nav-section-label ~ .list-unstyled{margin-top:14px; padding-top:14px; border-top:1px solid var(--surface-border);}
+.sidebar.collapsed .nav-section-label:first-of-type ~ .list-unstyled:first-of-type{margin-top:0; padding-top:0; border-top:0;}
+/* A submenu that was server-rendered "open" (e.g. active route) would otherwise
+   still try to expand inline here, squished into an 84px rail. Replaced by a
+   hover flyout instead — see .sidebar-flyout below. */
+.sidebar.collapsed .submenu{display:none !important;}
 
 .brand{
   display:flex; align-items:center; gap:10px;
@@ -293,6 +314,70 @@ h1,h2,h3,h4,h5,h6,.font-display{font-family:var(--font-display); letter-spacing:
 [data-theme="dark"] .progress-thick{background:rgba(255,255,255,.08);}
 .progress-thick .bar{height:100%; border-radius:20px;}
 
+/* Native Bootstrap form/table/dropdown components — theme-aware.
+   Overrides Bootstrap's own default colors, which otherwise ignore dark mode. */
+.form-control, .form-select, textarea.form-control{
+  background-color:var(--input-bg) !important;
+  border-color:var(--surface-border) !important;
+  color:var(--text-primary) !important;
+}
+.form-control::placeholder{color:var(--text-secondary); opacity:.75;}
+.form-control:focus, .form-select:focus{
+  background-color:var(--input-bg) !important;
+  color:var(--text-primary) !important;
+  border-color:var(--primary) !important;
+  box-shadow:0 0 0 3px rgba(var(--primary-rgb),.14);
+}
+.form-select{
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+/* The closed <select> box picks up our theme via .form-select above, but the
+   opened options list is rendered natively by the browser and ignores it
+   unless targeted directly — otherwise it stays a plain white system list
+   even in dark mode. Supported in Chromium/Firefox; Safari has no option-level
+   theming hook and falls back to its own native list, which is an acceptable
+   platform limit rather than a bug in the stylesheet. */
+.form-select option{
+  background-color:var(--surface-solid);
+  color:var(--text-primary);
+}
+.form-check-input{background-color:var(--input-bg); border-color:var(--surface-border);}
+.form-check-input:checked{background-color:var(--primary); border-color:var(--primary);}
+.form-check-input:focus{border-color:var(--primary); box-shadow:0 0 0 3px rgba(var(--primary-rgb),.14);}
+
+.table{color:var(--text-primary); --bs-table-color:var(--text-primary); --bs-table-border-color:var(--surface-border);}
+
+.dropdown-menu{
+  background-color:var(--surface-solid); border:1px solid var(--surface-border);
+  color:var(--text-primary); box-shadow:var(--shadow-soft); border-radius:var(--r-md);
+}
+.dropdown-item{color:var(--text-primary); font-size:.86rem;}
+.dropdown-item:hover, .dropdown-item:focus{background-color:rgba(var(--primary-rgb),.08); color:var(--text-primary);}
+.dropdown-divider{border-color:var(--surface-border);}
+
+/* Alerts — Bootstrap's default alert variants use fixed light tints
+   that don't follow dark mode; rebuild them on our own tokens */
+.alert{border:1px solid var(--surface-border); border-radius:var(--r-sm);}
+.alert-success{background:rgba(22,163,74,.12); color:var(--success); border-color:rgba(22,163,74,.24);}
+.alert-danger{background:rgba(220,38,38,.12); color:var(--danger); border-color:rgba(220,38,38,.24);}
+.alert-warning{background:rgba(245,158,11,.14); color:#B45309; border-color:rgba(245,158,11,.28);}
+[data-theme="dark"] .alert-warning{color:#FBBF24;}
+.alert-info{background:rgba(6,182,212,.12); color:var(--info); border-color:rgba(6,182,212,.24);}
+
+/* Popovers — default Bootstrap popover is a fixed white box,
+   which looks like a light-mode artifact floating over a dark page */
+.popover{background-color:var(--surface-solid); border:1px solid var(--surface-border); box-shadow:var(--shadow-soft);}
+.popover .popover-header{background-color:var(--surface-solid); border-bottom:1px solid var(--surface-border); color:var(--text-primary);}
+.popover .popover-body{color:var(--text-secondary);}
+.bs-popover-top>.popover-arrow::before, .bs-popover-auto[data-popper-placement^=top]>.popover-arrow::before{border-top-color:var(--surface-border);}
+.bs-popover-top>.popover-arrow::after, .bs-popover-auto[data-popper-placement^=top]>.popover-arrow::after{border-top-color:var(--surface-solid);}
+.bs-popover-bottom>.popover-arrow::before, .bs-popover-auto[data-popper-placement^=bottom]>.popover-arrow::before{border-bottom-color:var(--surface-border);}
+.bs-popover-bottom>.popover-arrow::after, .bs-popover-auto[data-popper-placement^=bottom]>.popover-arrow::after{border-bottom-color:var(--surface-solid);}
+
+/* Modal/toast close (X) icon — Bootstrap bakes it as a fixed dark SVG,
+   invisible against a dark modal background unless inverted */
+[data-theme="dark"] .btn-close{filter:invert(1) grayscale(100%) brightness(200%);}
+
 .btn-nimbus{
   background:linear-gradient(135deg,var(--primary),var(--secondary)); border:0; color:#fff;
   font-weight:600; font-size:.85rem; padding:9px 18px; border-radius:11px;
@@ -304,6 +389,101 @@ h1,h2,h3,h4,h5,h6,.font-display{font-family:var(--font-display); letter-spacing:
 
 .mobile-overlay{position:fixed; inset:0; background:rgba(15,23,42,.5); z-index:39; display:none;}
 .mobile-overlay.show{display:block;}
+
+/* Collapsed sidebar hover tooltip — JS-positioned, not CSS-only,
+   since it needs to escape the sidebar's overflow-y:auto clipping */
+.sidebar-tooltip{
+  position:fixed; z-index:70;
+  background:var(--gray-900); color:#fff;
+  font-size:.78rem; font-weight:600; font-family:var(--font-body);
+  padding:6px 12px; border-radius:8px; white-space:nowrap;
+  box-shadow:0 10px 24px -8px rgba(0,0,0,.4);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-50%) translateX(-4px);
+  transition:opacity .15s ease, transform .15s ease;
+}
+.sidebar-tooltip.show{opacity:1; visibility:visible; transform:translateY(-50%) translateX(0);}
+[data-theme="dark"] .sidebar-tooltip{background:#F1F5F9; color:#0F172A;}
+
+/* Collapsed-sidebar submenu flyout — e.g. "Data Views" -> Tables/Advanced/Exports.
+   Same escape-the-container approach as the tooltip above (position:fixed,
+   JS-positioned), since the sidebar's scroll container would otherwise clip it. */
+.sidebar-flyout{
+  position:fixed; z-index:70; min-width:190px;
+  background:var(--surface-solid); border:1px solid var(--surface-border);
+  border-radius:var(--r-md); box-shadow:var(--shadow-soft); padding:8px;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-50%) translateX(-4px);
+  transition:opacity .15s ease, transform .15s ease;
+}
+.sidebar-flyout.show{opacity:1; visibility:visible; pointer-events:auto; transform:translateY(-50%) translateX(0);}
+.sidebar-flyout .flyout-title{
+  font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--text-secondary); padding:4px 10px 8px;
+}
+.sidebar-flyout a{
+  display:block; padding:8px 10px; border-radius:8px; font-size:.85rem; font-weight:500;
+  color:var(--text-primary); text-decoration:none;
+}
+.sidebar-flyout a:hover{background:rgba(var(--primary-rgb),.08); color:var(--primary);}
+.sidebar-flyout a.active{color:var(--primary); font-weight:600;}
+
+/* ============================================
+   PAGE LOADER BAR — perceived-speed cue during
+   full-page navigations (Laravel is a classic MPA)
+   ============================================ */
+.page-loader-bar{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  z-index:300; transition:width .3s ease, opacity .3s ease;
+  box-shadow:0 0 8px rgba(var(--primary-rgb),.6);
+  opacity:0; pointer-events:none;
+}
+.page-loader-bar.active{opacity:1;}
+
+/* ============================================
+   COMMAND PALETTE (Ctrl/Cmd + K)
+   ============================================ */
+.command-palette-overlay{
+  position:fixed; inset:0; z-index:200;
+  background:rgba(8,12,20,.55); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  display:none; align-items:flex-start; justify-content:center;
+  padding:12vh 20px 20px;
+}
+.command-palette-overlay.show{display:flex;}
+.command-palette{
+  width:100%; max-width:560px; max-height:min(60vh, 480px);
+  background:var(--surface-solid); border:1px solid var(--surface-border);
+  border-radius:var(--r-lg); box-shadow:0 30px 60px -20px rgba(0,0,0,.45);
+  overflow:hidden; display:flex; flex-direction:column;
+  animation:cpIn .16s ease both;
+}
+@keyframes cpIn{from{opacity:0; transform:translateY(-8px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);}}
+.command-palette-input-wrap{
+  display:flex; align-items:center; gap:10px; padding:16px 18px;
+  border-bottom:1px solid var(--surface-border); flex-shrink:0;
+}
+.command-palette-input-wrap i{color:var(--text-secondary);}
+.command-palette-input-wrap input{
+  flex:1; border:0; outline:0; background:transparent; color:var(--text-primary); font-size:.95rem;
+}
+.command-palette-input-wrap kbd{
+  font-family:var(--font-mono); font-size:.68rem; background:var(--gray-100); color:var(--text-secondary);
+  border-radius:5px; padding:2px 7px; border:1px solid var(--surface-border);
+}
+[data-theme="dark"] .command-palette-input-wrap kbd{background:rgba(255,255,255,.06);}
+.command-palette-list{list-style:none; margin:0; padding:8px; overflow-y:auto;}
+.command-palette-list li{
+  display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:var(--r-sm);
+  cursor:pointer; color:var(--text-primary); font-size:.88rem; font-weight:500;
+}
+.command-palette-list li i{width:20px; text-align:center; color:var(--text-secondary); font-size:1rem;}
+.command-palette-list li .cp-hint{margin-left:auto; font-size:.72rem; color:var(--text-secondary); font-weight:400;}
+.command-palette-list li.active{background:rgba(var(--primary-rgb),.1); color:var(--primary);}
+.command-palette-list li.active i{color:var(--primary);}
+.command-palette-list li.hidden{display:none;}
+.command-palette-empty{padding:26px; text-align:center; color:var(--text-secondary); font-size:.85rem; display:none;}
+.command-palette-empty.show{display:block;}
 
 @media (max-width:991px){
   .sidebar{position:fixed; left:-280px; top:0; height:100vh; z-index:50;}

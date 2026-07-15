@@ -41,7 +41,7 @@
               <span class="badge-soft warning">Warning</span>
               <span class="badge-soft danger">Danger</span>
               <span class="badge bg-secondary">Bootstrap</span>
-              <span class="badge rounded-pill" style="background:var(--gray-200); color:var(--text-primary);">Neutral</span>
+              <span class="badge rounded-pill" style="background:var(--skeleton-bg); color:var(--text-primary);">Neutral</span>
             </div>
           </div>
         </div>
@@ -84,10 +84,10 @@
           <div class="glass-card p-4 fade-up h-100">
             <h2 class="section-title mb-3">Avatars</h2>
             <div class="d-flex align-items-center mb-3">
-              <div class="row-avatar" style="width:40px;height:40px;font-size:.85rem;background:#2563EB; margin-left:-8px; border:2px solid var(--surface-solid);">EV</div>
-              <div class="row-avatar" style="width:40px;height:40px;font-size:.85rem;background:#4F46E5; margin-left:-8px; border:2px solid var(--surface-solid);">MI</div>
+              <div class="row-avatar" style="width:40px;height:40px;font-size:.85rem;background:#0D9488; margin-left:-8px; border:2px solid var(--surface-solid);">EV</div>
+              <div class="row-avatar" style="width:40px;height:40px;font-size:.85rem;background:#0891B2; margin-left:-8px; border:2px solid var(--surface-solid);">MI</div>
               <div class="row-avatar" style="width:40px;height:40px;font-size:.85rem;background:#06B6D4; margin-left:-8px; border:2px solid var(--surface-solid);">SR</div>
-              <div class="row-avatar" style="width:40px;height:40px;font-size:.78rem;background:var(--gray-300); color:var(--gray-700); margin-left:-8px; border:2px solid var(--surface-solid);">+9</div>
+              <div class="row-avatar" style="width:40px;height:40px;font-size:.78rem;background:var(--surface); color:var(--text-secondary); margin-left:-8px; border:2px solid var(--surface-solid);">+9</div>
             </div>
             <h2 class="section-title mb-3 mt-4">Rating</h2>
             <div style="color:var(--warning); font-size:1.1rem;">
@@ -194,10 +194,10 @@
           <div class="glass-card p-4 fade-up h-100">
             <h2 class="section-title mb-3">Skeleton loading</h2>
             <div class="d-flex flex-column gap-2">
-              <div style="height:14px; width:70%; border-radius:6px; background:var(--gray-200); animation:pulse 1.4s ease-in-out infinite;"></div>
-              <div style="height:14px; width:90%; border-radius:6px; background:var(--gray-200); animation:pulse 1.4s ease-in-out infinite .1s;"></div>
-              <div style="height:14px; width:50%; border-radius:6px; background:var(--gray-200); animation:pulse 1.4s ease-in-out infinite .2s;"></div>
-              <div style="height:80px; width:100%; border-radius:12px; background:var(--gray-200); margin-top:8px; animation:pulse 1.4s ease-in-out infinite .3s;"></div>
+              <div style="height:14px; width:70%; border-radius:6px; background:var(--skeleton-bg); animation:pulse 1.4s ease-in-out infinite;"></div>
+              <div style="height:14px; width:90%; border-radius:6px; background:var(--skeleton-bg); animation:pulse 1.4s ease-in-out infinite .1s;"></div>
+              <div style="height:14px; width:50%; border-radius:6px; background:var(--skeleton-bg); animation:pulse 1.4s ease-in-out infinite .2s;"></div>
+              <div style="height:80px; width:100%; border-radius:12px; background:var(--skeleton-bg); margin-top:8px; animation:pulse 1.4s ease-in-out infinite .3s;"></div>
             </div>
           </div>
         </div>

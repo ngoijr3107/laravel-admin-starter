@@ -115,7 +115,7 @@
    CUSTOMERS TABLE — search, sort, filter, paginate, bulk select
    ============================================ */
 const initials = n => n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
-const avatarColors = ['#2563EB','#4F46E5','#06B6D4','#F59E0B','#DC2626','#16A34A'];
+const avatarColors = ['#0D9488','#0891B2','#06B6D4','#F59E0B','#DC2626','#16A34A'];
 
 const customers = [
   {name:'Elena Vance', company:'Northwind Retail', plan:'Enterprise', spend:12400, status:'Active'},
@@ -125,7 +125,7 @@ const customers = [
   {name:'Priya Nair', company:'Nair Consulting', plan:'Pro', spend:990, status:'Active'},
   {name:'Liam Carter', company:'Carter Logistics', plan:'Team', spend:5400, status:'Active'},
   {name:'Yuki Tanaka', company:'Tanaka Design Studio', plan:'Starter', spend:640, status:'Pending'},
-  {name:'Amara Kessler', company:'Nimbus Internal', plan:'Enterprise', spend:0, status:'Active'},
+  {name:'Amara Kessler', company:'CreativePro Internal', plan:'Enterprise', spend:0, status:'Active'},
   {name:'Noah Bergström', company:'Bergström AB', plan:'Pro', spend:2100, status:'Active'},
   {name:'Fatima Al-Sayed', company:'Al-Sayed Trading', plan:'Team', spend:7800, status:'Suspended'},
   {name:'Diego Morales', company:'Morales Freight', plan:'Starter', spend:410, status:'Pending'},

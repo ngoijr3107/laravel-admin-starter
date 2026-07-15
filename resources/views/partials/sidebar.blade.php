@@ -1,7 +1,7 @@
 <aside class="sidebar" id="sidebar">
   <div class="brand">
     <div class="brand-mark">N</div>
-    <div class="brand-text">Nimbus <small>Enterprise Suite</small></div>
+    <div class="brand-text">CreativePro <small>Enterprise Suite</small></div>
   </div>
 
   <nav class="sidebar-scroll">

@@ -2,9 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Set theme before first paint to avoid a light-mode flash on reload */
+(function(){
+  var t = localStorage.getItem('creativepro-theme');
+  if(!t){ t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title', 'Sign in') &mdash; Nimbus</title>
+<title>@yield('title', 'Sign in') &mdash; CreativePro</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,7 +30,7 @@
   <div class="brand-panel">
     <div class="d-flex align-items-center gap-2">
       <div class="brand-mark-lg">N</div>
-      <div class="brand-name">Nimbus</div>
+      <div class="brand-name">CreativePro</div>
     </div>
 
     <div class="floaty-card d-none d-lg-block">
@@ -33,7 +41,7 @@
 
     <div class="brand-quote">
       <h2>@yield('brand-heading', 'Run your entire business from one calm, uncluttered screen.')</h2>
-      <p>@yield('brand-subtext', 'Nimbus brings your revenue, orders, customers and team into a single workspace built for speed.')</p>
+      <p>@yield('brand-subtext', 'CreativePro brings your revenue, orders, customers and team into a single workspace built for speed.')</p>
       <div class="stat-strip">
         <div><div class="num">12k+</div><div class="lbl">Teams</div></div>
         <div><div class="num">99.98%</div><div class="lbl">Uptime</div></div>
@@ -41,7 +49,7 @@
       </div>
     </div>
 
-    <div class="brand-footer">&copy; {{ date('Y') }} Nimbus Enterprise Suite. All rights reserved.</div>
+    <div class="brand-footer">&copy; {{ date('Y') }} CreativePro Enterprise Suite. All rights reserved.</div>
   </div>
 
   <!-- FORM PANEL -->
@@ -56,8 +64,8 @@
 const root = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
-function applyTheme(t){ root.setAttribute('data-theme', t); themeIcon.className = t==='dark' ? 'bi bi-moon-stars-fill':'bi bi-sun-fill'; localStorage.setItem('nimbus-theme', t); }
-applyTheme(localStorage.getItem('nimbus-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'));
+function applyTheme(t){ root.setAttribute('data-theme', t); themeIcon.className = t==='dark' ? 'bi bi-moon-stars-fill':'bi bi-sun-fill'; localStorage.setItem('creativepro-theme', t); }
+applyTheme(localStorage.getItem('creativepro-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'));
 themeToggle.addEventListener('click', () => applyTheme(root.getAttribute('data-theme')==='dark' ? 'light':'dark'));
 </script>
 

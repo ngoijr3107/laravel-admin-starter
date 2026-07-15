@@ -33,7 +33,7 @@
   </div>
   <div class="col-xxl-3 col-sm-6">
     <div class="glass-card stat-card hoverable fade-up" style="animation-delay:.05s">
-      <div class="stat-icon" style="background:linear-gradient(135deg,#06B6D4,#2563EB);"><i class="bi bi-cart-check"></i></div>
+      <div class="stat-icon" style="background:linear-gradient(135deg,#06B6D4,#0D9488);"><i class="bi bi-cart-check"></i></div>
       <div class="stat-label mb-1">Orders</div>
       <div class="stat-value">3,218</div>
       <span class="stat-trend up mt-2 d-inline-flex"><i class="bi bi-arrow-up-short"></i>8.1%</span>
@@ -125,8 +125,8 @@ function themeColors(){
   return {
     grid: dark ? 'rgba(255,255,255,.06)' : 'rgba(15,23,42,.06)',
     text: dark ? '#94A3B8' : '#64748B',
-    primary: '#2563EB',
-    secondary: '#4F46E5'
+    primary: '#0D9488',
+    secondary: '#0891B2'
   };
 }
 
@@ -171,12 +171,12 @@ function renderCharts(){
     type:'doughnut',
     data:{
       labels:['Organic Search','Direct','Social','Referral'],
-      datasets:[{data:[42,28,18,12], backgroundColor:['#2563EB','#4F46E5','#06B6D4','#F59E0B'], borderWidth:0, hoverOffset:6}]
+      datasets:[{data:[42,28,18,12], backgroundColor:['#0D9488','#0891B2','#06B6D4','#F59E0B'], borderWidth:0, hoverOffset:6}]
     },
     options:{responsive:true, maintainAspectRatio:false, cutout:'72%', plugins:{legend:{display:false}}}
   });
 
-  const legendColors = {'Organic Search':'#2563EB','Direct':'#4F46E5','Social':'#06B6D4','Referral':'#F59E0B'};
+  const legendColors = {'Organic Search':'#0D9488','Direct':'#0891B2','Social':'#06B6D4','Referral':'#F59E0B'};
   document.getElementById('donutLegend').innerHTML = Object.entries(legendColors).map(([k,v]) =>
     `<div class="d-flex align-items-center justify-content-between" style="font-size:.82rem;">
        <span><i class="bi bi-circle-fill me-2" style="color:${v}; font-size:.55rem;"></i>${k}</span>
@@ -201,8 +201,8 @@ function renderCharts(){
    DATA — table + activity feed
    ============================================ */
 const orders = [
-  {name:'Elena Vance', init:'EV', color:'#2563EB', id:'#ORD-8841', product:'Pro Plan — Annual', amount:'$1,240.00', status:'Completed', badge:'success'},
-  {name:'Marcus Iwu', init:'MI', color:'#4F46E5', id:'#ORD-8840', product:'Team Seats x5', amount:'$860.00', status:'Processing', badge:'warning'},
+  {name:'Elena Vance', init:'EV', color:'#0D9488', id:'#ORD-8841', product:'Pro Plan — Annual', amount:'$1,240.00', status:'Completed', badge:'success'},
+  {name:'Marcus Iwu', init:'MI', color:'#0891B2', id:'#ORD-8840', product:'Team Seats x5', amount:'$860.00', status:'Processing', badge:'warning'},
   {name:'Sofia Ren', init:'SR', color:'#06B6D4', id:'#ORD-8839', product:'Starter Plan', amount:'$120.00', status:'Completed', badge:'success'},
   {name:'David Okoro', init:'DO', color:'#F59E0B', id:'#ORD-8838', product:'Enterprise License', amount:'$4,500.00', status:'Refunded', badge:'danger'},
   {name:'Priya Nair', init:'PN', color:'#DC2626', id:'#ORD-8837', product:'Pro Plan — Monthly', amount:'$99.00', status:'Completed', badge:'success'},
@@ -218,9 +218,9 @@ document.getElementById('ordersTableBody').innerHTML = orders.map(o => `
 
 const activity = [
   {icon:'bi-check2', color:'#16A34A', text:'Invoice #4021 marked as paid', time:'2 min ago'},
-  {icon:'bi-person-plus', color:'#2563EB', text:'New customer Priya Nair signed up', time:'18 min ago'},
+  {icon:'bi-person-plus', color:'#0D9488', text:'New customer Priya Nair signed up', time:'18 min ago'},
   {icon:'bi-exclamation-triangle', color:'#F59E0B', text:'Server latency spike detected', time:'1 hr ago'},
-  {icon:'bi-box-seam', color:'#4F46E5', text:'Order #8838 shipped to Lagos, NG', time:'3 hr ago'},
+  {icon:'bi-box-seam', color:'#0891B2', text:'Order #8838 shipped to Lagos, NG', time:'3 hr ago'},
   {icon:'bi-chat-dots', color:'#06B6D4', text:'New message from Marcus Iwu', time:'5 hr ago'},
 ];
 document.getElementById('activityFeed').innerHTML = activity.map(a => `
